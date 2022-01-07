@@ -1,0 +1,44 @@
+#   Python script to program a 6502 microprocessor using opCodes
+
+def main():
+  code = bytearray([
+  0xa9, 0xff,           # lda #$42
+  0x8d, 0x02, 0x60,     # sta $6002
+  
+  0xa9, 0x80,           # lda #$55
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x40,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x20,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x10,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x08,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x04,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x02,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0xa9, 0x01,           # lda #$aa
+  0x8d, 0x00, 0x60,     # sta $6000
+  
+  0x4c, 0x05, 0x80,     # jmp $8005
+  ])
+  rom = code + bytearray([0xea] * (32768-len(code)))
+
+  
+  rom[0x7ffc] = 0x00
+  rom[0x7ffd] = 0x80
+  
+  with open("rom.bin", "wb") as outFile:
+    outFile.write(rom)
+
+if __name__ == '__main__':
+  main()
